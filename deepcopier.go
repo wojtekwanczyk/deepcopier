@@ -191,6 +191,10 @@ func process(dst interface{}, src interface{}, args ...Options) error {
 		if srcFieldType.Type.AssignableTo(dstFieldType.Type) {
 			dstFieldValue.Set(srcFieldValue)
 		}
+
+		if srcFieldValue.Kind() == dstFieldValue.Kind() {
+			dstFieldValue.Set(srcFieldValue.Convert(dstFieldType.Type))
+		}
 	}
 
 	for _, m := range srcMethodNames {

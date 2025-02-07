@@ -619,6 +619,38 @@ func TestField_SameNameWithDifferentType(t *testing.T) {
 	assert.Empty(t, dstStr.Foo)
 }
 
+func TestField_SameNameWithSameTypeKind(t *testing.T) {
+	type (
+		AliasT int32
+
+		FooSrc struct {
+			Foo AliasT
+		}
+
+		FooDst struct {
+			Foo int32
+		}
+	)
+
+	//
+	// To()
+	//
+
+	src := &FooSrc{Foo: 123}
+	dst := &FooDst{}
+	deepcopier.Copy(dst).From(src)
+
+	assert.Equal(t, int32(src.Foo), dst.Foo)
+
+	//
+	// From()
+	//
+
+	dst = &FooDst{}
+	deepcopier.Copy(dst).From(src)
+	assert.Equal(t, int32(src.Foo), dst.Foo)
+}
+
 func TestMethod(t *testing.T) {
 	var (
 		c   = map[string]interface{}{"message": "hello"}
