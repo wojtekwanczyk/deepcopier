@@ -9,7 +9,7 @@ import (
 	"github.com/lib/pq"
 	uuid "github.com/satori/go.uuid"
 	assert "github.com/stretchr/testify/require"
-	"github.com/ulule/deepcopier"
+	"github.com/wojtekwanczyk/deepcopier"
 )
 
 func TestField(t *testing.T) {
